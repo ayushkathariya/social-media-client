@@ -6,11 +6,14 @@ import { SlUserFollowing } from "react-icons/sl";
 import { LuLogOut } from "react-icons/lu";
 import UpdateProfileCard from "../../components/UpdateProfileCard/UpdateProfileCard";
 import Avatar from "../../components/avatar/Avatar";
-import { useSelector } from "react-redux";
+import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
+import toast from "react-hot-toast";
 
-function UpdateProfile() {
-  const myProfile = useSelector((state) => state.appConfigReducer.myProfile);
-
+export default function UpdateProfile() {
+  const logoutUser = async () => {
+    localStorage.removeItem(KEY_ACCESS_TOKEN);
+    toast.success("Logout successful");
+  };
   return (
     <div className="mx-2 lg:mx-8">
       <div className="lg:flex lg:gap-2">
@@ -31,12 +34,11 @@ function UpdateProfile() {
             title="Followings"
             link="/followings"
           />
-          <Sidebar
-            icon={<Avatar />}
-            title="My Profile"
-            link={`/user/${myProfile?._id}`}
-          />
-          <Sidebar icon={<LuLogOut />} title="Logout" />
+          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
+
+          <span onClick={logoutUser}>
+            <Sidebar icon={<LuLogOut />} title="Logout" link={"/login"} />
+          </span>
         </div>
         <div className="lg:basis-[73%]">
           <span className="mb-5">
@@ -47,5 +49,3 @@ function UpdateProfile() {
     </div>
   );
 }
-
-export default UpdateProfile;

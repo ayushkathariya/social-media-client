@@ -7,31 +7,14 @@ import { SlUserFollowing } from "react-icons/sl";
 import { LuLogOut } from "react-icons/lu";
 import Sponsor from "../../components/sponsor/Sponsor";
 import User from "../../components/user/User";
-import { axiosClient } from "../../utils/axiosClient";
-import { KEY_ACCESS_TOKEN, removeItem } from "../../utils/localStorageManager";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading, showToast } from "../../redux/slices/appConfigSlice";
-import { TOAST_SUCCESS } from "../../App";
-import { useNavigate } from "react-router-dom";
 import Avatar from "../../components/avatar/Avatar";
+import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
+import toast from "react-hot-toast";
 
 function Feed() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const myProfile = useSelector((state) => state.appConfigReducer.myProfile);
-
   const logoutUser = async () => {
-    dispatch(
-      showToast({
-        type: TOAST_SUCCESS,
-        message: "Logout successful",
-      })
-    );
-    dispatch(setLoading(true));
-    await axiosClient.get("/auth/logout");
-    removeItem(KEY_ACCESS_TOKEN);
-    navigate("/login");
-    dispatch(setLoading(false));
+    localStorage.removeItem(KEY_ACCESS_TOKEN);
+    toast.success("Logout successful");
   };
 
   return (
@@ -54,13 +37,9 @@ function Feed() {
             title="Followings"
             link="/followings"
           />
-          <Sidebar
-            icon={<Avatar />}
-            title="My Profile"
-            link={`/user/${myProfile?._id}`}
-          />
+          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
           <span onClick={logoutUser}>
-            <Sidebar icon={<LuLogOut />} title="Logout" />
+            <Sidebar icon={<LuLogOut />} title="Logout" link="/login" />
           </span>
         </div>
         <div className="lg:basis-[48%] mt-16 overflow-auto">

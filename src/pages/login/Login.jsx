@@ -1,34 +1,28 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosClient } from "../../utils/axiosClient";
-import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager";
-import { useDispatch } from "react-redux";
-import { showToast } from "../../redux/slices/appConfigSlice";
-import { TOAST_SUCCESS } from "../../App";
+import { useUserLoginMutation } from "../../redux/features/auth";
+import toast from "react-hot-toast";
+import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loginApi] = useUserLoginMutation();
 
   async function handleSubmit(e) {
-    e.preventDefault();
     try {
-      const response = await axiosClient.post("/auth/login", {
-        email,
-        password,
-      });
-      dispatch(
-        showToast({
-          type: TOAST_SUCCESS,
-          message: "Login successful",
-        })
-      );
-      setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
-      navigate("/");
+      e.preventDefault();
+      const res = await loginApi({ email, password });
+      if (res.data) {
+        localStorage.setItem(KEY_ACCESS_TOKEN, res.data.accessToken);
+        toast.success("Login successful");
+        navigate("/");
+      } else {
+        toast.error(res.error.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ error:", error);
     }
   }
 

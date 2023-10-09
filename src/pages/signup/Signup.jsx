@@ -1,36 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosClient } from "../../utils/axiosClient";
-import { KEY_ACCESS_TOKEN, setItem } from "../../utils/localStorageManager";
-import { useDispatch } from "react-redux";
-import { showToast } from "../../redux/slices/appConfigSlice";
-import { TOAST_SUCCESS } from "../../App";
+import { useUserSignupMutation } from "../../redux/features/auth";
+import toast from "react-hot-toast";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupApi] = useUserSignupMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
-    e.preventDefault();
     try {
-      const response = await axiosClient.post("/auth/signup", {
-        name,
-        email,
-        password,
-      });
-      dispatch(
-        showToast({
-          type: TOAST_SUCCESS,
-          message: "Signup successful",
-        })
-      );
-      setItem(KEY_ACCESS_TOKEN, response.result.accessToken);
-      navigate("/");
+      e.preventDefault();
+      const res = await signupApi({ name, email, password });
+      if (res.data) {
+        navigate(`/otp-verify?email=${email}`);
+      } else {
+        toast.error(res.error.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ error:", error);
     }
   }
 
@@ -98,7 +88,7 @@ function Signup() {
           </button>
           <p className="flex justify-center mt-4">
             Already have an account?
-            <Link to="/login" className="underline ml-1">
+            <Link to="/login" className="ml-1 underline">
               Login
             </Link>
           </p>

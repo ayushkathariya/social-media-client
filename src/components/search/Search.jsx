@@ -1,32 +1,21 @@
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { showToast } from "../../redux/slices/appConfigSlice";
-import { TOAST_FAILURE } from "../../App";
-import { useDispatch } from "react-redux";
 
-function Search() {
+export default function Search() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (name) {
-      navigate(`/search-user/${name}`);
-    } else {
-      dispatch(
-        showToast({
-          type: TOAST_FAILURE,
-          message: "Enter Name",
-        })
-      );
-    }
+    if (!name) return;
+    navigate(`/search-user/${name}`);
+    setName("");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex items-center px-3 py-1 lg:py-[5px] border  rounded-full md:py-[3px] md:px-5 xl:mr-10">
+      <div className="flex items-center px-3 py-1 lg:py-[5px] border rounded-full md:py-[3px] md:px-5 xl:mr-10">
         <input
           type="text"
           className="px-2 rounded outline-none bg-inherit w-36 sm:w-64 sm:py-1 md:w-72 md:text-lg lg:w-96 xl:w-[35rem]"
@@ -43,5 +32,3 @@ function Search() {
     </form>
   );
 }
-
-export default Search;
