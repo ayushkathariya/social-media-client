@@ -4,7 +4,7 @@ import { useUserLoginMutation } from "../../redux/features/auth";
 import toast from "react-hot-toast";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function Login() {
       if (res.data) {
         localStorage.setItem(KEY_ACCESS_TOKEN, res.data.accessToken);
         toast.success("Login successful");
-        navigate("/");
+        window.location.replace("/");
       } else {
         toast.error(res.error.data.message);
       }
@@ -83,5 +83,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

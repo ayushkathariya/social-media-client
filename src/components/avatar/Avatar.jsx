@@ -1,10 +1,13 @@
 import React from "react";
+import { useGetUserProfileQuery } from "../../redux/features/user";
 
-function Avatar({ src }) {
+export default function Avatar({ src }) {
+  const { data } = useGetUserProfileQuery();
+
   return (
     <div>
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5l0KUeEM0mUEhXmSZJ3xFJyT70amD-Dyz-L2rz-Z5zw&s"
+        src={`${data?.curUser?.avatar}`}
         alt="avatar"
         loading="lazy"
         className="rounded-full cursor-pointer w-9 md:w-10"
@@ -12,5 +15,3 @@ function Avatar({ src }) {
     </div>
   );
 }
-
-export default Avatar;
