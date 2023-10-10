@@ -92,9 +92,10 @@ export default function Feed() {
           {userSuggestionsData?.users?.map((item) => (
             <React.Fragment key={item?._id}>
               <User
-                name={item?.name}
-                avatar={item?.avatar}
-                userId={item?._id}
+                name={item?.user?.name}
+                avatar={item?.user?.avatar}
+                userId={item?.user?._id}
+                isFollowing={item?.isFollowing}
               />
             </React.Fragment>
           ))}

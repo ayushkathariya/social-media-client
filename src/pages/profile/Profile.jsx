@@ -86,6 +86,7 @@ export default function Profile() {
           <span className="hidden lg:block lg:ml-3">
             <ProfileCard
               name={data?.user?.name}
+              userId={data?.user?._id}
               avatar={data?.user?.avatar}
               followersCount={data?.user?.followersCount}
               followingsCount={data?.user?.followingsCount}

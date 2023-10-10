@@ -29,6 +29,41 @@ export const userApi = createApi({
       },
       providesTags: ["User"],
     }),
+    getUserSuggestions: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/api/users/suggestions",
+      }),
+      providesTags: ["User"],
+    }),
+    getFollowingUsers: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/api/users/followings",
+      }),
+      providesTags: ["User"],
+    }),
+    getFollowingUsersForDisplay: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/api/users/followings-user",
+      }),
+      providesTags: ["User"],
+    }),
+    getUsersBySearchName: builder.query({
+      query: (name) => ({
+        method: "GET",
+        url: `/api/users/search/${name}`,
+      }),
+      providesTags: ["User"],
+    }),
+    getFindFriendsUsers: builder.query({
+      query: () => ({
+        method: "GET",
+        url: `/api/users/find-friends`,
+      }),
+      providesTags: ["User"],
+    }),
     getPosts: builder.query({
       query: () => ({
         method: "GET",
@@ -45,13 +80,6 @@ export const userApi = createApi({
       },
       providesTags: ["User"],
     }),
-    getUserSuggestions: builder.query({
-      query: () => ({
-        method: "GET",
-        url: "/api/users/suggestions",
-      }),
-      providesTags: ["User"],
-    }),
   }),
 });
 
@@ -61,4 +89,8 @@ export const {
   useGetUserSuggestionsQuery,
   useGetUserByIdQuery,
   useGetPostByIdQuery,
+  useGetFollowingUsersQuery,
+  useGetFollowingUsersForDisplayQuery,
+  useGetUsersBySearchNameQuery,
+  useGetFindFriendsUsersQuery,
 } = userApi;
