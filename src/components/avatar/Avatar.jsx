@@ -1,13 +1,10 @@
 import React from "react";
-import { useGetUserProfileQuery } from "../../redux/features/user";
 
 export default function Avatar({ src }) {
-  const { data } = useGetUserProfileQuery();
-
   return (
     <div>
       <img
-        src={`${data?.curUser?.avatar}`}
+        src={src}
         alt="avatar"
         loading="lazy"
         className="rounded-full cursor-pointer w-9 md:w-10"
@@ -15,3 +12,7 @@ export default function Avatar({ src }) {
     </div>
   );
 }
+
+Avatar.defaultProps = {
+  src: "https://blogtimenow.com/wp-content/uploads/2014/06/hide-facebook-profile-picture-notification.jpg",
+};

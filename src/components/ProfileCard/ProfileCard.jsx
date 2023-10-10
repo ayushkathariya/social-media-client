@@ -1,7 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProfileCard() {
+export default function ProfileCard({
+  name,
+  avatar,
+  followersCount,
+  followingsCount,
+  isFollowing,
+  ifCurrentUser,
+}) {
   const navigate = useNavigate();
 
   function handleNavigate() {
@@ -9,36 +16,53 @@ function ProfileCard() {
   }
 
   return (
-    <div className="flex items-center flex-col border p-3 rounded-xl sm:py-10 md:mt-4">
+    <div className="flex flex-col items-center p-3 border rounded-xl sm:py-10 md:mt-4">
       <img
         onClick={handleNavigate}
-        src="https://images.pexels.com/photos/1153334/pexels-photo-1153334.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src={avatar}
         alt="image"
-        className="rounded-full h-36 w-36 cursor-pointer"
+        loading="lazy"
+        className="rounded-full cursor-pointer h-36 w-36"
       />
       <p
-        className="text-lg font-semibold mt-2 cursor-pointer"
+        className="mt-2 text-lg font-semibold cursor-pointer"
         onClick={handleNavigate}
       >
-        Ayush Kathariya
+        {name}
       </p>
-      <span className="flex text-lg  gap-6 lg:gap-1 mt-2">
-        <p>1 Followers</p>
-        <p>5 Followings</p>
+      <span className="flex gap-6 mt-2 text-lg lg:gap-1">
+        <p>{`${followersCount} Followers`}</p>
+        <p>{`${followingsCount} Followings`}</p>
       </span>
       <span>
-        <div className="border-gray-400 w-52 text-center py-1 rounded-full text-lg font-bold cursor-pointer mb-2 mt-3 btn-ghost lg:w-48 xl:w-52">
-          Follow
-        </div>
-        <div
-          onClick={() => navigate("/update-profile")}
-          className="border-gray-400 w-52 text-center py-1 rounded-full text-lg font-bold cursor-pointer mb-2 mt-3 btn-ghost lg:w-48 xl:w-52"
-        >
-          Update
-        </div>
+        {ifCurrentUser ? null : isFollowing ? (
+          <div className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52">
+            Unfollow
+          </div>
+        ) : (
+          <div className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52">
+            Follow
+          </div>
+        )}
+        {ifCurrentUser ? (
+          <div
+            onClick={() => navigate("/update-profile")}
+            className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52"
+          >
+            Update
+          </div>
+        ) : null}
       </span>
     </div>
   );
 }
 
-export default ProfileCard;
+ProfileCard.defaultProps = {
+  name: "Bijay Budha",
+  avatar:
+    "https://media.istockphoto.com/id/1312136351/photo/3d-illustration-of-cute-cartoon-man-with-eyeglasses-in-blue-shirt-with-arms-crossed-close-up.jpg?s=1024x1024&w=is&k=20&c=BhAW15C2FNji6NdJs5uzj9TrJIoR2RO68UqEqNhKhV8=",
+  followersCount: 12,
+  followingsCount: 7,
+  isFollowing: false,
+  ifCurrentUser: false,
+};

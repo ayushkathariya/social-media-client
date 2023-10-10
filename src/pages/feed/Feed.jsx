@@ -8,10 +8,29 @@ import { LuLogOut } from "react-icons/lu";
 import Sponsor from "../../components/sponsor/Sponsor";
 import User from "../../components/user/User";
 import Avatar from "../../components/avatar/Avatar";
+import Loading from "../../components/loading/Loading";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
+import {
+  useGetPostsQuery,
+  useGetUserProfileQuery,
+  useGetUserSuggestionsQuery,
+} from "../../redux/features/user";
 
-function Feed() {
+export default function Feed() {
+  const { data, isLoading } = useGetPostsQuery();
+  const { data: myData } = useGetUserProfileQuery();
+  const { data: userSuggestionsData, isLoading: userSuggestionsLoading } =
+    useGetUserSuggestionsQuery();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (userSuggestionsLoading) {
+    return <Loading />;
+  }
+
   const logoutUser = async () => {
     localStorage.removeItem(KEY_ACCESS_TOKEN);
     toast.success("Logout successful");
@@ -37,17 +56,32 @@ function Feed() {
             title="Followings"
             link="/followings"
           />
-          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
+          <Sidebar
+            icon={<Avatar />}
+            title="My Profile"
+            link={`/user/${myData?.curUser?._id}`}
+          />
           <span onClick={logoutUser}>
             <Sidebar icon={<LuLogOut />} title="Logout" link="/login" />
           </span>
         </div>
         <div className="lg:basis-[48%] mt-16 overflow-auto">
           <div className="max-h-screen overflow-y-auto">
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {data?.posts?.map((item) => (
+              <React.Fragment key={item?._id}>
+                <Post
+                  _id={item?._id}
+                  userId={item?.user?._id}
+                  name={item?.user?.name}
+                  caption={item?.caption}
+                  image={item?.image?.url}
+                  likesCount={item?.likesCount}
+                  commentsCount={item?.commentsCount}
+                  isLiked={item?.isLiked}
+                  timeAgo={item?.timeAgo}
+                />
+              </React.Fragment>
+            ))}
           </div>
         </div>
         <div className="lg:basis-[25%] mt-20 hidden lg:block overflow-hidden">
@@ -55,14 +89,17 @@ function Feed() {
           <Sponsor />
           <Sponsor />
           <h3 className="mt-4 text-xl text-slate-400">Suggested for you</h3>
-          <User />
-          <User />
-          <User />
-          <User />
+          {userSuggestionsData?.users?.map((item) => (
+            <React.Fragment key={item?._id}>
+              <User
+                name={item?.name}
+                avatar={item?.avatar}
+                userId={item?._id}
+              />
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </div>
   );
 }
-
-export default Feed;

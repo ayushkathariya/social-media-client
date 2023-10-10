@@ -7,8 +7,11 @@ import { LuLogOut } from "react-icons/lu";
 import Avatar from "../../components/avatar/Avatar";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
+import { useGetUserProfileQuery } from "../../redux/features/user";
 
 export default function Message() {
+  const { data: myData } = useGetUserProfileQuery();
+
   const logoutUser = async () => {
     localStorage.removeItem(KEY_ACCESS_TOKEN);
     toast.success("Logout successful");
@@ -34,7 +37,11 @@ export default function Message() {
             title="Followings"
             link="/followings"
           />
-          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
+          <Sidebar
+            icon={<Avatar />}
+            title="My Profile"
+            link={`/user/${myData?.curUser?._id}`}
+          />
           <span onClick={logoutUser}>
             <Sidebar icon={<LuLogOut />} title="Logout" link="/login" />
           </span>

@@ -8,12 +8,23 @@ import { LuLogOut } from "react-icons/lu";
 import CreatePost from "../../components/create-post/CreatePost";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import Avatar from "../../components/avatar/Avatar";
+import Loading from "../../components/loading/Loading";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import {
+  useGetUserByIdQuery,
+  useGetUserProfileQuery,
+} from "../../redux/features/user";
 
 export default function Profile() {
   const params = useParams();
+  const { data, isLoading } = useGetUserByIdQuery(params);
+  const { data: myData } = useGetUserProfileQuery();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const logoutUser = async () => {
     localStorage.removeItem(KEY_ACCESS_TOKEN);
@@ -39,7 +50,11 @@ export default function Profile() {
             title="Followings"
             link="/followings"
           />
-          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
+          <Sidebar
+            icon={<Avatar />}
+            title="My Profile"
+            link={`/user/${myData?.curUser?._id}`}
+          />
           <span onClick={logoutUser}>
             <Sidebar icon={<LuLogOut />} title="Logout" link="/login" />
           </span>
@@ -49,17 +64,34 @@ export default function Profile() {
             <span className="lg:hidden">
               <ProfileCard />
             </span>
-            {params.userId === "123" && <CreatePost />}
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {params.userId === myData?.curUser?._id && <CreatePost />}
+            {data?.user?.posts?.map((item) => (
+              <Post
+                key={item?._id}
+                name={item?.user?.name}
+                caption={item?.caption}
+                image={item?.image?.url}
+                commentsCount={item?.commentsCount}
+                likesCount={item?.likesCount}
+                isLiked={item?.isLiked}
+                timeAgo={item?.timeAgo}
+                _id={item?._id}
+                userId={item?.user?._id}
+              />
+            ))}
           </div>
         </div>
         <div className="lg:basis-[25%] mt-20 hidden lg:block overflow-hidden">
           <h3 className="text-xl text-slate-500">Profile</h3>
           <span className="hidden lg:block lg:ml-3">
-            <ProfileCard />
+            <ProfileCard
+              name={data?.user?.name}
+              avatar={data?.user?.avatar}
+              followersCount={data?.user?.followersCount}
+              followingsCount={data?.user?.followingsCount}
+              isFollowing={data?.user?.isFollowing}
+              ifCurrentUser={data?.user?.ifCurrentUser}
+            />
           </span>
         </div>
       </div>

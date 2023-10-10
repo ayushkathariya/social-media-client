@@ -20,7 +20,45 @@ export const userApi = createApi({
       }),
       providesTags: ["User"],
     }),
+    getUserById: builder.query({
+      query: (id) => {
+        return {
+          method: "GET",
+          url: `/api/users/${id.userId}`,
+        };
+      },
+      providesTags: ["User"],
+    }),
+    getPosts: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/api/posts",
+      }),
+      providesTags: ["User"],
+    }),
+    getPostById: builder.query({
+      query: (id) => {
+        return {
+          method: "GET",
+          url: `/api/posts/${id}`,
+        };
+      },
+      providesTags: ["User"],
+    }),
+    getUserSuggestions: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/api/users/suggestions",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
-export const { useGetUserProfileQuery } = userApi;
+export const {
+  useGetUserProfileQuery,
+  useGetPostsQuery,
+  useGetUserSuggestionsQuery,
+  useGetUserByIdQuery,
+  useGetPostByIdQuery,
+} = userApi;

@@ -16,7 +16,7 @@ import Comment from "./pages/comment/Comment";
 import NotFound from "./pages/NotFound/NotFound";
 import OTPVerify from "./pages/otp-verify/OTPVerify";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <div>
@@ -45,5 +45,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

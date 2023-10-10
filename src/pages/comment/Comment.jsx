@@ -8,10 +8,24 @@ import { LuLogOut } from "react-icons/lu";
 import CommentsLists from "../../components/CommentsList/CommentsLists";
 import CommentForm from "../../components/CommentForm/CommentForm";
 import Avatar from "../../components/avatar/Avatar";
+import Loading from "../../components/loading/Loading";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
+import {
+  useGetPostByIdQuery,
+  useGetUserProfileQuery,
+} from "../../redux/features/user";
+import { useParams } from "react-router-dom";
 
 export default function Comment() {
+  const params = useParams();
+  const { data, isLoading } = useGetPostByIdQuery(params?.postId);
+  const { data: myData } = useGetUserProfileQuery();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   const logoutUser = async () => {
     localStorage.removeItem(KEY_ACCESS_TOKEN);
     toast.success("Logout successful");
@@ -36,34 +50,53 @@ export default function Comment() {
             title="Comment"
             link="/followings"
           />
-          <Sidebar icon={<Avatar />} title="My Profile" link={`/user/123`} />
+          <Sidebar
+            icon={<Avatar />}
+            title="My Profile"
+            link={`/user/${myData?.curUser?._id}`}
+          />
           <span onClick={logoutUser}>
             <Sidebar icon={<LuLogOut />} title="Logout" link="/login" />
           </span>
         </div>
         <div className="lg:basis-[48%] mt-16 overflow-hidden">
           <div className="max-h-screen overflow-y-auto">
-            <Post />
+            <Post
+              _id={data?.post?._id}
+              userId={data?.post?.user?._id}
+              name={data?.post?.user?.name}
+              image={data?.post?.image?.url}
+              caption={data?.post?.caption}
+              likesCount={data?.post?.likesCount}
+              commentsCount={data?.post?.commentsCount}
+              isLiked={data?.post?.isLiked}
+              timeAgo={data?.post?.timeAgo}
+            />
             <span className="lg:hidden">
-              <CommentForm />
-              <CommentsLists />
-              <CommentsLists />
-              <CommentsLists />
-              <CommentsLists />
+              <CommentForm avatar={data?.post?.user?.avatar} />
+              {data?.post?.comments.map((item) => (
+                <CommentsLists
+                  key={item._id}
+                  comment={item?.comment}
+                  avatar={item?.user?.avatar}
+                  name={item?.user?.name}
+                  timeAgo={item?.timeAgo}
+                />
+              ))}
             </span>
           </div>
         </div>
         <div className="lg:basis-[25%] mt-20 hidden lg:block overflow-auto">
-          <CommentForm />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
-          <CommentsLists />
+          <CommentForm avatar={data?.post?.user?.avatar} />
+          {data?.post?.comments.map((item) => (
+            <CommentsLists
+              key={item._id}
+              comment={item?.comment}
+              avatar={item?.user?.avatar}
+              name={item?.user?.name}
+              timeAgo={item?.timeAgo}
+            />
+          ))}
         </div>
       </div>
     </div>

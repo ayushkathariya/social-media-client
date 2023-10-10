@@ -2,7 +2,7 @@ import { useState } from "react";
 import Avatar from "../avatar/Avatar";
 import { FcGallery } from "react-icons/fc";
 
-function CreatePost() {
+export default function CreatePost() {
   const [postImg, setPostImg] = useState("");
   const [caption, setCaption] = useState("");
 
@@ -56,5 +56,3 @@ function CreatePost() {
     </form>
   );
 }
-
-export default CreatePost;
