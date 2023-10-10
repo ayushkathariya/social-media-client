@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { PiShareFatLight } from "react-icons/pi";
 import {
   FBShareBtn,
-  FBMessangerShareBtn,
   RedditShareBtn,
   WhatsAppShareBtn,
   TelegramShareBtn,
@@ -10,7 +8,7 @@ import {
   LinkedInShareBtn,
 } from "dv-social-share";
 
-function Popup() {
+export default function Popup({ url, caption }) {
   const openModal = () => {
     const modal = document.getElementById("my_modal_2");
     if (modal) {
@@ -25,43 +23,35 @@ function Popup() {
       </button>
       <dialog id="my_modal_2" className="modal">
         <form method="dialog" className="modal-box">
-          <h3 className="font-bold text-lg">Share to your friends!</h3>
+          <h3 className="text-lg font-bold">Share to your friends!</h3>
           <span className={`flex gap-4 justify-around mt-8`}>
-            <FBShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
-              hashTag="#dvsocialshare"
-            />
-            <FBMessangerShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
-              hashTag="#dvsocialshare"
-            />
+            <FBShareBtn url={url} quote={caption} hashTag="#dvsocialshare" />
+
             <WhatsAppShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
+              url={url}
+              quote={caption}
               hashTag="#dvsocialshare"
             />
             <TelegramShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
+              url={url}
+              quote={caption}
               hashTag="#dvsocialshare"
             />
 
             <LinkedInShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
+              url={url}
+              quote={caption}
               hashTag="#dvsocialshare"
             />
             <RedditShareBtn
-              url="https://dv-social-share.vercel.app"
-              quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
+              url={url}
+              quote={caption}
               hashTag="#dvsocialshare"
             />
             <span className="text-red-500">
               <EmailShareBtn
-                url="https://dv-social-share.vercel.app"
-                quote="dv-social-share is a social share buttons for your next React.js & Next.js apps."
+                url={url}
+                quote={caption}
                 hashTag="#dvsocialshare"
               />
             </span>
@@ -79,5 +69,3 @@ function Popup() {
     </div>
   );
 }
-
-export default Popup;

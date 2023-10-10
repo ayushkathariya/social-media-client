@@ -68,7 +68,12 @@ export default function Post({
             <p className="text-xl">{commentsCount}</p>
           </span>
           <div className="flex items-center gap-2 p-2 rounded-md cursor-pointer btn-ghost md:px-4 ">
-            <Popup />
+            <Popup
+              url={`${
+                import.meta.env.VITE_REACT_APP_CLIENT_BASE_URL
+              }/post/${_id}`}
+              caption={caption}
+            />
           </div>
         </div>
       </div>
