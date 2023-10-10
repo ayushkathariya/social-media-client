@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useFollowUserMutation } from "../../redux/features/user";
 
 export default function ProfileCard({
   name,
@@ -11,6 +12,7 @@ export default function ProfileCard({
   ifCurrentUser,
 }) {
   const navigate = useNavigate();
+  const [followUserApi] = useFollowUserMutation();
 
   function handleNavigate() {
     navigate(`/user/${userId}`);
@@ -37,11 +39,17 @@ export default function ProfileCard({
       </span>
       <span>
         {ifCurrentUser ? null : isFollowing ? (
-          <div className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52">
+          <div
+            onClick={() => followUserApi({ id: userId })}
+            className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52"
+          >
             Unfollow
           </div>
         ) : (
-          <div className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52">
+          <div
+            onClick={() => followUserApi({ id: userId })}
+            className="py-1 mt-3 mb-2 text-lg font-bold text-center border-gray-400 rounded-full cursor-pointer w-52 btn-ghost lg:w-48 xl:w-52"
+          >
             Follow
           </div>
         )}

@@ -62,7 +62,15 @@ export default function Profile() {
         <div className="lg:basis-[48%] mt-16 overflow-auto">
           <div className="max-h-screen overflow-y-auto">
             <span className="lg:hidden">
-              <ProfileCard />
+              <ProfileCard
+                name={data?.user?.name}
+                userId={data?.user?._id}
+                avatar={data?.user?.avatar}
+                followersCount={data?.user?.followersCount}
+                followingsCount={data?.user?.followingsCount}
+                isFollowing={data?.user?.isFollowing}
+                ifCurrentUser={data?.user?.ifCurrentUser}
+              />
             </span>
             {params.userId === myData?.curUser?._id && <CreatePost />}
             {data?.user?.posts?.map((item) => (
