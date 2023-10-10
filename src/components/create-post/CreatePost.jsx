@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Avatar from "../avatar/Avatar";
 import { FcGallery } from "react-icons/fc";
+import { useCreatePostMutation } from "../../redux/features/user";
 
 export default function CreatePost() {
   const [postImg, setPostImg] = useState("");
   const [caption, setCaption] = useState("");
+  const [createPostApi] = useCreatePostMutation();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -17,8 +19,24 @@ export default function CreatePost() {
     };
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (postImg === "" || caption === "") return;
+      createPostApi({ image: postImg, caption });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setCaption("");
+      setPostImg("");
+    }
+  };
+
   return (
-    <form className="flex flex-col items-center w-full gap-2 mt-3">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center w-full gap-2 mt-3"
+    >
       <div className="flex items-center justify-center gap-3">
         <span className="mr-2">
           <Avatar />
@@ -28,6 +46,7 @@ export default function CreatePost() {
           placeholder="What's happening ?"
           className="px-2 py-2 border rounded outline-none w-[18rem] sm:w-[29rem] md:w-[40rem] lg:w-[21rem] xl:w-[24rem] 2xl:w-[34rem] focus:ring focus:ring-blue-100"
           onChange={(e) => setCaption(e.target.value)}
+          required
         />
       </div>
       {postImg && (

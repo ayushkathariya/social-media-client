@@ -98,6 +98,16 @@ export const userApi = createApi({
       },
       invalidatesTags: ["User"],
     }),
+    createPost: builder.mutation({
+      query: (body) => {
+        return {
+          method: "POST",
+          url: `/api/posts`,
+          body,
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -113,4 +123,5 @@ export const {
   useGetFindFriendsUsersQuery,
   useLikePostMutation,
   useFollowUserMutation,
+  useCreatePostMutation,
 } = userApi;
