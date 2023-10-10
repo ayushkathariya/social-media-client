@@ -68,19 +68,18 @@ export default function Feed() {
         <div className="lg:basis-[48%] mt-16 overflow-auto">
           <div className="max-h-screen overflow-y-auto">
             {data?.posts?.map((item) => (
-              <React.Fragment key={item?._id}>
-                <Post
-                  _id={item?._id}
-                  userId={item?.user?._id}
-                  name={item?.user?.name}
-                  caption={item?.caption}
-                  image={item?.image?.url}
-                  likesCount={item?.likesCount}
-                  commentsCount={item?.commentsCount}
-                  isLiked={item?.isLiked}
-                  timeAgo={item?.timeAgo}
-                />
-              </React.Fragment>
+              <Post
+                key={item?._id}
+                _id={item?._id}
+                userId={item?.user?._id}
+                name={item?.user?.name}
+                caption={item?.caption}
+                image={item?.image?.url}
+                likesCount={item?.likesCount}
+                commentsCount={item?.commentsCount}
+                isLiked={item?.isLiked}
+                timeAgo={item?.timeAgo}
+              />
             ))}
           </div>
         </div>
@@ -90,14 +89,13 @@ export default function Feed() {
           <Sponsor />
           <h3 className="mt-4 text-xl text-slate-400">Suggested for you</h3>
           {userSuggestionsData?.users?.map((item) => (
-            <React.Fragment key={item?._id}>
-              <User
-                name={item?.user?.name}
-                avatar={item?.user?.avatar}
-                userId={item?.user?._id}
-                isFollowing={item?.isFollowing}
-              />
-            </React.Fragment>
+            <User
+              key={item?.user?._id}
+              name={item?.user?.name}
+              avatar={item?.user?.avatar}
+              userId={item?.user?._id}
+              isFollowing={item?.isFollowing}
+            />
           ))}
         </div>
       </div>

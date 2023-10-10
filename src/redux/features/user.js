@@ -80,6 +80,15 @@ export const userApi = createApi({
       },
       providesTags: ["User"],
     }),
+    likePost: builder.mutation({
+      query: (body) => {
+        return {
+          method: "POST",
+          url: `/api/posts/${body.id}/like`,
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -93,4 +102,5 @@ export const {
   useGetFollowingUsersForDisplayQuery,
   useGetUsersBySearchNameQuery,
   useGetFindFriendsUsersQuery,
+  useLikePostMutation,
 } = userApi;

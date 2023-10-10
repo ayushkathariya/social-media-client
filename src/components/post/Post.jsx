@@ -3,9 +3,9 @@ import Avatar from "../avatar/Avatar";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
-
 import Popup from "../popup/Popup";
 import { useNavigate } from "react-router-dom";
+import { useLikePostMutation } from "../../redux/features/user";
 
 export default function Post({
   _id,
@@ -19,6 +19,7 @@ export default function Post({
   userId,
 }) {
   const navigate = useNavigate();
+  const [likePostApi] = useLikePostMutation();
 
   return (
     <div className="mt-4">
@@ -42,15 +43,21 @@ export default function Post({
         <div className="flex justify-between px-2 pt-2">
           <span className="flex items-center gap-2 p-2 rounded-md cursor-pointer lg:gap-5 btn-ghost md:px-4">
             {isLiked ? (
-              <>
+              <div
+                onClick={() => likePostApi({ id: _id })}
+                className="flex items-center gap-2"
+              >
                 <FcLike className="text-2xl " />
                 <p className="text-xl">{likesCount}</p>
-              </>
+              </div>
             ) : (
-              <>
+              <div
+                onClick={() => likePostApi({ id: _id })}
+                className="flex items-center gap-2"
+              >
                 <AiOutlineHeart className="text-2xl " />
                 <p className="text-xl">{likesCount}</p>
-              </>
+              </div>
             )}
           </span>
           <span

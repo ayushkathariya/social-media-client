@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "../avatar/Avatar";
 import Search from "../search/Search";
+import Loading from "../loading/Loading";
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../left-sidebar/Sidebar";
@@ -9,9 +10,15 @@ import { SlUserFollowing } from "react-icons/sl";
 import { LuLogOut } from "react-icons/lu";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
+import { useGetUserProfileQuery } from "../../redux/features/user";
 
 function Navbar() {
   const navigate = useNavigate();
+  const { data: myData, isLoading: myDataLoading } = useGetUserProfileQuery();
+
+  if (myDataLoading) {
+    return <Loading />;
+  }
 
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") || "light"
@@ -93,7 +100,7 @@ function Navbar() {
                 <Sidebar
                   icon={<Avatar />}
                   title="My Profile"
-                  link={`/user/123`}
+                  link={`/user/${myData?.curUser?._id}`}
                 />
               </li>
               <li onClick={logoutUser}>
