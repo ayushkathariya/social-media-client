@@ -108,6 +108,16 @@ export const userApi = createApi({
       },
       invalidatesTags: ["User"],
     }),
+    createComment: builder.mutation({
+      query: (body) => {
+        return {
+          method: "POST",
+          url: `/api/comments`,
+          body,
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -124,4 +134,5 @@ export const {
   useLikePostMutation,
   useFollowUserMutation,
   useCreatePostMutation,
+  useCreateCommentMutation,
 } = userApi;

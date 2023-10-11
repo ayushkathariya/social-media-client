@@ -1,14 +1,36 @@
-import React from "react";
+import { useState } from "react";
+import { FcCheckmark } from "react-icons/fc";
+import { useCreateCommentMutation } from "../../redux/features/user";
 
-export default function CommentForm({ avatar }) {
+export default function CommentForm({ avatar, postId }) {
+  const [createCommentApi] = useCreateCommentMutation();
+  const [comment, setComment] = useState("");
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (comment === "") return;
+      await createCommentApi({ comment, postId });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setComment("");
+    }
+  };
+
   return (
-    <form className="flex items-center gap-2 mt-4">
+    <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-4">
       <img className="w-12 rounded-full" src={avatar} alt="photo" />
       <input
         type="text"
         placeholder="Add a comment"
+        onChange={(e) => setComment(e.target.value)}
+        value={comment}
         className="w-full border-b-2 outline-none bg-inherit"
       />
+      <button className="mr-2 text-xl btn btn-circle" type="submit">
+        <FcCheckmark />
+      </button>
     </form>
   );
 }

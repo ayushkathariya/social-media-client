@@ -73,7 +73,10 @@ export default function Comment() {
               timeAgo={data?.post?.timeAgo}
             />
             <span className="lg:hidden">
-              <CommentForm avatar={data?.post?.user?.avatar} />
+              <CommentForm
+                avatar={data?.post?.user?.avatar}
+                postId={data?.post?._id}
+              />
               {data?.post?.comments.map((item) => (
                 <CommentsLists
                   key={item._id}
@@ -87,7 +90,10 @@ export default function Comment() {
           </div>
         </div>
         <div className="lg:basis-[25%] mt-20 hidden lg:block overflow-auto">
-          <CommentForm avatar={data?.post?.user?.avatar} />
+          <CommentForm
+            avatar={data?.post?.user?.avatar}
+            postId={data?.post?._id}
+          />
           {data?.post?.comments.map((item) => (
             <CommentsLists
               key={item._id}
