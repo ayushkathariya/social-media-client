@@ -2,11 +2,17 @@ import React from "react";
 import { AiOutlineDelete, AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-export default function CommentsLists({ name, avatar, comment, timeAgo }) {
+export default function CommentsLists({
+  name,
+  avatar,
+  comment,
+  timeAgo,
+  userId,
+}) {
   const navigate = useNavigate();
 
   function handleNavigate() {
-    navigate(`/user/xyz`);
+    navigate(`/user/${userId}`);
   }
 
   return (
