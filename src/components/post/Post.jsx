@@ -17,6 +17,7 @@ export default function Post({
   commentsCount,
   isLiked,
   userId,
+  postUserAvatar,
 }) {
   const navigate = useNavigate();
   const [likePostApi] = useLikePostMutation();
@@ -26,7 +27,7 @@ export default function Post({
       <div className="p-3 border rounded">
         <div className="flex items-center gap-3">
           <span onClick={() => navigate(`/user/${userId}`)}>
-            <Avatar />
+            <Avatar src={postUserAvatar} />
           </span>
           <p>{name}</p>
           <p>{timeAgo}</p>

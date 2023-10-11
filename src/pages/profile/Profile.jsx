@@ -51,7 +51,7 @@ export default function Profile() {
             link="/followings"
           />
           <Sidebar
-            icon={<Avatar />}
+            icon={<Avatar src={myData?.curUser?.avatar} />}
             title="My Profile"
             link={`/user/${myData?.curUser?._id}`}
           />
@@ -85,6 +85,7 @@ export default function Profile() {
                 timeAgo={item?.timeAgo}
                 _id={item?._id}
                 userId={item?.user?._id}
+                postUserAvatar={item?.user?.avatar}
               />
             ))}
           </div>

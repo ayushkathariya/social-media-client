@@ -38,7 +38,7 @@ export default function UpdateProfile() {
             link="/followings"
           />
           <Sidebar
-            icon={<Avatar />}
+            icon={<Avatar src={myData?.curUser?.avatar} />}
             title="My Profile"
             link={`/user/${myData?.curUser?._id}`}
           />

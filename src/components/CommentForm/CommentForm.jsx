@@ -20,13 +20,13 @@ export default function CommentForm({ avatar, postId }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-4">
-      <img className="w-12 rounded-full" src={avatar} alt="photo" />
+      <img className="w-12 h-12 rounded-full" src={avatar} alt="photo" />
       <input
         type="text"
         placeholder="Add a comment"
         onChange={(e) => setComment(e.target.value)}
         value={comment}
-        className="w-full border-b-2 outline-none bg-inherit"
+        className="w-[90%] lg:w-[60%] border-b-2 outline-none bg-inherit"
       />
       <button className="mr-2 text-xl btn btn-circle" type="submit">
         <FcCheckmark />

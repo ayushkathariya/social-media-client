@@ -98,7 +98,7 @@ function Navbar() {
               </li>
               <li>
                 <Sidebar
-                  icon={<Avatar />}
+                  icon={<Avatar src={myData?.curUser?.avatar} />}
                   title="My Profile"
                   link={`/user/${myData?.curUser?._id}`}
                 />
@@ -137,7 +137,7 @@ function Navbar() {
             </svg>
           )}
           <span onClick={() => navigate(`/user/${myData?.curUser?._id}`)}>
-            <Avatar />
+            <Avatar src={myData?.curUser?.avatar} />
           </span>
         </div>
       </div>

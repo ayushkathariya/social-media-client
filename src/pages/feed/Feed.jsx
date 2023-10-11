@@ -19,6 +19,7 @@ import {
 
 export default function Feed() {
   const { data, isLoading } = useGetPostsQuery();
+  console.log("🚀 ~ data:", data);
   const { data: myData } = useGetUserProfileQuery();
   const { data: userSuggestionsData, isLoading: userSuggestionsLoading } =
     useGetUserSuggestionsQuery();
@@ -57,7 +58,7 @@ export default function Feed() {
             link="/followings"
           />
           <Sidebar
-            icon={<Avatar />}
+            icon={<Avatar src={myData?.curUser?.avatar} />}
             title="My Profile"
             link={`/user/${myData?.curUser?._id}`}
           />
@@ -79,6 +80,7 @@ export default function Feed() {
                 commentsCount={item?.commentsCount}
                 isLiked={item?.isLiked}
                 timeAgo={item?.timeAgo}
+                postUserAvatar={item?.user?.avatar}
               />
             ))}
           </div>

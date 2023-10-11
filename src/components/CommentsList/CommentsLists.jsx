@@ -16,9 +16,9 @@ export default function CommentsLists({ name, avatar, comment, timeAgo }) {
           src={avatar}
           alt="photo"
           onClick={handleNavigate}
-          className="w-12 rounded-full cursor-pointer"
+          className="w-12 h-12 rounded-full cursor-pointer"
         />
-        <h1 className="cursor-pointer" onClick={handleNavigate}>
+        <h1 className="cursor-pointer font-semibold" onClick={handleNavigate}>
           {name}
         </h1>
         <p>{timeAgo}</p>

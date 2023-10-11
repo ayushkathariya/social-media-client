@@ -7,7 +7,7 @@ export default function Avatar({ src }) {
         src={src}
         alt="avatar"
         loading="lazy"
-        className="rounded-full cursor-pointer w-9 md:w-10"
+        className="rounded-full bg-cover cursor-pointer w-9 h-9 md:w-10 md:h-10"
       />
     </div>
   );

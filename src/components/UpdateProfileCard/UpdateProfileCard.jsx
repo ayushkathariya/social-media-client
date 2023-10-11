@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import {
+  useGetUserProfileQuery,
+  useUpdateUserMutation,
+} from "../../redux/features/user";
 
-function UpdateProfileCard() {
+export default function UpdateProfileCard() {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [password, setPassword] = useState("");
+  const { data: myData } = useGetUserProfileQuery();
+  const [updateUserApi] = useUpdateUserMutation();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -16,15 +21,31 @@ function UpdateProfileCard() {
     };
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (name === "" && image === "") return;
+      await updateUserApi({ name, image });
+    } catch (error) {
+      console.log("🚀 ~ error:", error);
+    } finally {
+      setName("");
+      setImage("");
+    }
+  };
+
   return (
-    <form className="flex w-full h-[90vh] justify-center items-center">
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full h-[90vh] justify-center items-center"
+    >
       <div className="lg:mr-16 lg:mt-16 xl:mr-80">
         <div className="border-[2px] p-3 flex flex-col items-center gap-1 rounded-xl">
           <div>
             <label htmlFor="image" className="avatar">
               <div className="rounded-full cursor-pointer w-28 ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5l0KUeEM0mUEhXmSZJ3xFJyT70amD-Dyz-L2rz-Z5zw&s"
+                  src={image ? image : myData?.curUser?.avatar}
                   title="Click to change profile photo"
                 />
               </div>
@@ -52,7 +73,7 @@ function UpdateProfileCard() {
                   placeholder="Your Name"
                 />
               </div>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label htmlFor="password" className="block text-lg font-medium">
                   Password
                 </label>
@@ -64,7 +85,7 @@ function UpdateProfileCard() {
                   className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-opacity-50 focus:outline-none focus:border-blue-500"
                   placeholder="New Password"
                 />
-              </div>
+              </div> */}
               <button
                 type="submit"
                 title="Click to update profile"
@@ -79,5 +100,3 @@ function UpdateProfileCard() {
     </form>
   );
 }
-
-export default UpdateProfileCard;

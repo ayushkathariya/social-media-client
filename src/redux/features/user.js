@@ -73,6 +73,16 @@ export const userApi = createApi({
       },
       invalidatesTags: ["User"],
     }),
+    updateUser: builder.mutation({
+      query: (body) => {
+        return {
+          method: "POST",
+          url: `/api/users/update`,
+          body,
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
     getPosts: builder.query({
       query: () => ({
         method: "GET",
@@ -135,4 +145,5 @@ export const {
   useFollowUserMutation,
   useCreatePostMutation,
   useCreateCommentMutation,
+  useUpdateUserMutation,
 } = userApi;
