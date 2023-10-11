@@ -1,12 +1,16 @@
 import { useState } from "react";
 import Avatar from "../avatar/Avatar";
 import { FcGallery } from "react-icons/fc";
-import { useCreatePostMutation } from "../../redux/features/user";
+import {
+  useCreatePostMutation,
+  useGetUserProfileQuery,
+} from "../../redux/features/user";
 
 export default function CreatePost() {
   const [postImg, setPostImg] = useState("");
   const [caption, setCaption] = useState("");
   const [createPostApi] = useCreatePostMutation();
+  const { data: myData } = useGetUserProfileQuery();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -39,11 +43,11 @@ export default function CreatePost() {
     >
       <div className="flex items-center justify-center gap-3">
         <span className="mr-2">
-          <Avatar />
+          <Avatar src={myData?.curUser?.avatar} />
         </span>
         <input
           type="text"
-          placeholder="What's happening ?"
+          placeholder={`What's happening ${myData?.curUser?.name}?`}
           className="px-2 py-2 border rounded outline-none w-[18rem] sm:w-[29rem] md:w-[40rem] lg:w-[21rem] xl:w-[24rem] 2xl:w-[34rem] focus:ring focus:ring-blue-100"
           onChange={(e) => setCaption(e.target.value)}
           required
