@@ -4,8 +4,8 @@ import {
   RedditShareBtn,
   WhatsAppShareBtn,
   TelegramShareBtn,
-  EmailShareBtn,
   LinkedInShareBtn,
+  TwitterShareBtn,
 } from "dv-social-share";
 
 export default function Popup({ url, caption }) {
@@ -49,7 +49,7 @@ export default function Popup({ url, caption }) {
               hashTag="#dvsocialshare"
             />
             <span className="text-red-500">
-              <EmailShareBtn
+              <TwitterShareBtn
                 url={url}
                 quote={caption}
                 hashTag="#dvsocialshare"
