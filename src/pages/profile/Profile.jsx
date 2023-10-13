@@ -73,6 +73,9 @@ export default function Profile() {
               />
             </span>
             {params.userId === myData?.curUser?._id && <CreatePost />}
+            {data?.user?.posts?.length === 0 && (
+              <h1 className="mt-5 font-semibold text-2xl">No posts</h1>
+            )}
             {data?.user?.posts?.map((item) => (
               <Post
                 key={item?._id}

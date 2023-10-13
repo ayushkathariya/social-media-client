@@ -66,6 +66,9 @@ export default function Followings() {
         </div>
         <div className="lg:basis-[48%] mt-16 overflow-auto">
           <div className="max-h-screen overflow-y-auto">
+            {data?.posts?.length === 0 && (
+              <h1 className="mt-5 font-semibold text-2xl">No posts</h1>
+            )}
             {data?.posts?.map((item) => (
               <Post
                 key={item?._id}
