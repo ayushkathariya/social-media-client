@@ -11,7 +11,17 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <script src="script.js"></script>
+  <script>
+    const htmlElement = document.querySelector("html");
+    const mode = localStorage.getItem("theme");
+
+    if (mode === "light") {
+      htmlElement.setAttribute("data-theme", "light");
+    } else {
+      htmlElement.setAttribute("data-theme", "dark");
+    }
+
+  </script>
 </body>
 
 </html>
