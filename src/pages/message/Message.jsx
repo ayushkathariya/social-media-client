@@ -48,7 +48,7 @@ export default function Message() {
         </div>
         <div className="lg:basis-[73%] mt-16 overflow-auto">
           <div className="max-h-screen">
-            <h1>Message</h1>
+            <h1>This feature is in beta.</h1>
           </div>
         </div>
       </div>
