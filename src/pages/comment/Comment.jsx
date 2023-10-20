@@ -83,6 +83,7 @@ export default function Comment() {
                   key={item._id}
                   comment={item?.comment}
                   avatar={item?.user?.avatar}
+                  userId={item?.user?._id}
                   name={item?.user?.name}
                   timeAgo={item?.timeAgo}
                 />
