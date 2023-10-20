@@ -109,17 +109,17 @@ function Navbar() {
             </ul>
           </div>
           <Link to="/">
-            <AiOutlineHome className="ml-2 text-[27px] rounded-md sm:text-[1.9rem] md:text-[2.3rem] btn-ghost" />
+            <AiOutlineHome className="text-[28px] rounded-md sm:text-[1.9rem] md:text-[2.3rem] btn-ghost" />
           </Link>
         </div>
 
         <div className="navbar-center">
           <Search />
         </div>
-        <div className="navbar-end md:mr-12 lg:mr-16 xl:mr-20">
+        <div className="navbar-end mr-2 md:mr-12 lg:mr-16 xl:mr-20">
           {darkMode === "dark" ? (
             <svg
-              className="w-8 cursor-pointer fill-current md:mr-5"
+              className="w-8 mr-1 cursor-pointer fill-current md:mr-5"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               onClick={toggleDarkMode}
@@ -128,7 +128,7 @@ function Navbar() {
             </svg>
           ) : (
             <svg
-              className="w-8 cursor-pointer fill-current md:mr-4"
+              className="w-8 mr-1 cursor-pointer fill-current md:mr-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               onClick={toggleDarkMode}

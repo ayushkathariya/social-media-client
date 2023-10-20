@@ -26,7 +26,7 @@ export default function CommentForm({ avatar, postId }) {
         placeholder="Add a comment"
         onChange={(e) => setComment(e.target.value)}
         value={comment}
-        className="w-[90%] lg:w-[60%] border-b-2 outline-none bg-inherit"
+        className="w-[60%] lg:w-[60%] border-b-2 outline-none bg-inherit"
       />
       <button className="mr-2 text-xl btn btn-circle" type="submit">
         <FcCheckmark />
