@@ -8,7 +8,6 @@ function OTPVerification() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
-  console.log("🚀 ~ file: OTPVerify.jsx:11 ~ OTPVerification ~ email:", email);
   const [verifyApi] = useUserVerifyMutation();
   const navigate = useNavigate();
 
