@@ -72,7 +72,7 @@ export default function Post({
             <Popup
               url={`${
                 import.meta.env.VITE_REACT_APP_CLIENT_BASE_URL
-              }/post/${_id}`}
+              }/#/post/${_id}`}
               caption={caption}
             />
           </div>
