@@ -11,7 +11,6 @@ import { LuLogOut } from "react-icons/lu";
 import { KEY_ACCESS_TOKEN } from "../../utils/localStorageManager";
 import toast from "react-hot-toast";
 import { useGetUserProfileQuery } from "../../redux/features/user";
-import favIcon from "../../assets/favicon.png";
 
 function Navbar() {
   const navigate = useNavigate();

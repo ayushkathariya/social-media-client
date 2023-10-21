@@ -27,7 +27,7 @@ export default function CommentsLists({
         <h1 className="cursor-pointer font-semibold" onClick={handleNavigate}>
           {name}
         </h1>
-        <p>{timeAgo}</p>
+        <p>{`${timeAgo} ago`}</p>
       </span>
       <div className="mt-1 ml-10">
         <span>{comment}</span>

@@ -30,7 +30,7 @@ export default function Post({
             <Avatar src={postUserAvatar} />
           </span>
           <p>{name}</p>
-          <p>{timeAgo}</p>
+          <p>{`${timeAgo} ago`}</p>
         </div>
         <div className="px-2 py-2">
           <p>{caption}</p>
