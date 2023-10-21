@@ -67,7 +67,7 @@ export default function UpdateProfileCard() {
                 <input
                   type="text"
                   id="name"
-                  value={name}
+                  value={name ? name : myData?.curUser?.name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-opacity-50 focus:outline-none focus:border-blue-500"
                   placeholder="Your Name"
