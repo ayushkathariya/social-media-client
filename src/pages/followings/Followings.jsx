@@ -81,6 +81,7 @@ export default function Followings() {
                 isLiked={item?.isLiked}
                 timeAgo={item?.timeAgo}
                 userId={item?.user?._id}
+                postUserAvatar={item?.user?.avatar}
               />
             ))}
           </div>
