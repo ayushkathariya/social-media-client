@@ -19,7 +19,6 @@ import {
 
 export default function Feed() {
   const { data, isLoading } = useGetPostsQuery();
-  console.log("🚀 ~ data:", data);
   const { data: myData } = useGetUserProfileQuery();
   const { data: userSuggestionsData, isLoading: userSuggestionsLoading } =
     useGetUserSuggestionsQuery();
