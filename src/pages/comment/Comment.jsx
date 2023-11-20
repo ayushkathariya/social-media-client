@@ -47,7 +47,7 @@ export default function Comment() {
           />
           <Sidebar
             icon={<SlUserFollowing />}
-            title="Comment"
+            title="Followings"
             link="/followings"
           />
           <Sidebar
