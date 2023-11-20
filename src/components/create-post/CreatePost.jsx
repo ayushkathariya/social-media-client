@@ -71,7 +71,7 @@ export default function CreatePost() {
             onChange={handleImageChange}
           />
           <label htmlFor="create-post" className="cursor-pointer">
-            <FcGallery className="mr-64 sm:mr-[27rem] md:mr-[38rem] lg:mr-[20rem] xl:mr-[22rem] 2xl:mr-[32rem] text-[2.2rem] text-green-600 cursor-pointer" />
+            <FcGallery className="mr-60 sm:mr-[27rem] md:mr-[38rem] lg:mr-[20rem] xl:mr-[22rem] 2xl:mr-[32rem] text-[2.2rem] text-green-600 cursor-pointer" />
           </label>
         </span>
         <button className="btn btn-sm btn-primary">Post</button>

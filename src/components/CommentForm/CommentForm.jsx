@@ -34,8 +34,3 @@ export default function CommentForm({ avatar, postId }) {
     </form>
   );
 }
-
-CommentForm.defaultProps = {
-  avatar:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5l0KUeEM0mUEhXmSZJ3xFJyT70amD-Dyz-L2rz-Z5zw&s",
-};
