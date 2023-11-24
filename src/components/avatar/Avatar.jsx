@@ -12,7 +12,3 @@ export default function Avatar({ src }) {
     </div>
   );
 }
-
-Avatar.defaultProps = {
-  src: "https://blogtimenow.com/wp-content/uploads/2014/06/hide-facebook-profile-picture-notification.jpg",
-};

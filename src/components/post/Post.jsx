@@ -30,7 +30,7 @@ export default function Post({
             <Avatar src={postUserAvatar} />
           </span>
           <p>{name}</p>
-          <p>{`${timeAgo} ago`}</p>
+          <p>{`${timeAgo}`}</p>
         </div>
         <div className="px-2 py-2">
           <p>{caption}</p>
@@ -81,16 +81,3 @@ export default function Post({
     </div>
   );
 }
-
-Post.defaultProps = {
-  name: "Ayush Kathariya",
-  timeAgo: "15m ago",
-  caption: "lorem lorem lroem dfsdfsdif mfsdjfsdkifasl lroem",
-  image:
-    "https://images.pexels.com/photos/4127941/pexels-photo-4127941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  likesCount: 40,
-  commentsCount: 10,
-  isLiked: false,
-  _id: 123,
-  userId: 25,
-};
