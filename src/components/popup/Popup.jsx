@@ -25,15 +25,44 @@ export default function Popup({ url, caption }) {
         <form method="dialog" className="modal-box">
           <h3 className="text-lg font-bold">Share to your friends!</h3>
           <span className={`flex gap-4 justify-around mt-8`}>
-            <FBShareBtn url={url} quote={caption} hashTag="#share" />
+            <FBShareBtn
+              url={url}
+              quote={caption}
+              openInNewTab
+              hashTag="#share"
+            />
+            <WhatsAppShareBtn
+              url={url}
+              quote={caption}
+              openInNewTab
+              hashTag="#share"
+            />
+            <TelegramShareBtn
+              url={url}
+              quote={caption}
+              openInNewTab
+              hashTag="#share"
+            />
 
-            <WhatsAppShareBtn url={url} quote={caption} hashTag="#share" />
-            <TelegramShareBtn url={url} quote={caption} hashTag="#share" />
-
-            <LinkedInShareBtn url={url} quote={caption} hashTag="#share" />
-            <RedditShareBtn url={url} quote={caption} hashTag="#share" />
+            <LinkedInShareBtn
+              url={url}
+              quote={caption}
+              openInNewTab
+              hashTag="#share"
+            />
+            <RedditShareBtn
+              url={url}
+              quote={caption}
+              openInNewTab
+              hashTag="#share"
+            />
             <span className="text-red-500">
-              <TwitterShareBtn url={url} quote={caption} hashTag="#share" />
+              <TwitterShareBtn
+                url={url}
+                quote={caption}
+                openInNewTab
+                hashTag="#share"
+              />
             </span>
           </span>
           <div className="modal-action">
